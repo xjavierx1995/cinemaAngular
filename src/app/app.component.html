@@ -1,8 +1,8 @@
-<mat-toolbar color="primary" class="mat-elevation-z8">
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+<mat-toolbar color="primary" class="mat-elevation-z10">
+  <button (click)="sidenav.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
-  <span>My App</span>
+  <span>Cinema Angular</span>
   <span class="example-spacer"></span>
   <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
     <mat-icon>favorite</mat-icon>
@@ -12,7 +12,20 @@
   </button>
 </mat-toolbar>
 
-<div class="container">
-  <mat-progress-bar mode="indeterminate" ></mat-progress-bar>
-</div>
-<router-outlet></router-outlet>
+<mat-sidenav-container hasBackdrop="false" >
+
+  <mat-sidenav #sidenav mode="push" class="sidenav-custom" >
+    <mat-selection-list [multiple]="false">
+      <mat-list-option [routerLink]="[route.url]" routerLinkActive="active(route)"  *ngFor="let route of routes" [value]="route.url">
+        <mat-icon mat-list-icon>{{route.icon}}</mat-icon>
+        {{route.name}}
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
