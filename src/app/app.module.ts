@@ -12,6 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import {AngularFirestore} from '@angular/fire/firestore'
 import { environment } from 'src/environments/environment';
 import { NewMovieComponent } from './components/modals/new-movie/new-movie.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NewMovieComponent } from './components/modals/new-movie/new-movie.compo
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    ReactiveFormsModule
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent]

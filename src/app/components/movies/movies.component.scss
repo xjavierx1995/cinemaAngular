@@ -1,3 +1,18 @@
 table {
   width: 100%;
 }
+
+
+.custom-spiner{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: #ffffff1f;
+  z-index: 1;
+}
+
+.custom-position{
+  padding-left: 40%;
+  padding-right: 40%;
+  padding-top: 30%;
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { NewMovieComponent } from '../modals/new-movie/new-movie.component';
 
 @Component({
@@ -21,23 +22,47 @@ export class MoviesComponent implements OnInit {
     {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
   ];
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  constructor(public dialog: MatDialog) { }
+  showLoader: boolean = false;
+  constructor(public dialog: MatDialog, public snack: MatSnackBar) { }
 
   ngOnInit(): void {
   }
 
-  newMovie(){
-    console.log('hola');
-
+  newMovieModal(){
     const dialogRef = this.dialog.open(NewMovieComponent, {
       width: '250px',
-      data: {name: 'Javier', animal: 'Dragon'}
+      // data: {name: 'Javier', animal: 'Dragon'}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+
+      if (result.type === 'submit') {
+        this.showLoader = true;
+        this.storeMovie(result);
+      }
+
       // this.animal = result;
     });
+  }
+
+  storeMovie(data){
+
+    let params = {
+      description: data.description,
+      title: data.title
+    }
+
+    setTimeout(() => {
+      this.showLoader = false;
+
+      this.snack.open('Película registrada con exito', 'ok', {
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+        duration: 5000
+      })
+    }, 5000);
+
+
   }
 
 }

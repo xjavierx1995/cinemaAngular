@@ -1,1 +1,27 @@
-<p>new-movie works!</p>
+<h1 mat-dialog-title>Nueva película</h1>
+<form [formGroup]="validations_form" (ngSubmit)="register(validations_form.value)">
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="title">
+      <ng-container *ngFor="let validation of validation_messages.title">
+        <mat-error *ngIf="validations_form.get('title').hasError(validation.type) && (validations_form.get('title').dirty || validations_form.get('title').touched)">
+          {{ validation.message }}
+        </mat-error>
+      </ng-container>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Descripción</mat-label>
+      <input matInput formControlName="description">
+      <ng-container *ngFor="let validation of validation_messages.description">
+        <mat-error *ngIf="validations_form.get('description').hasError(validation.type) && (validations_form.get('description').dirty || validations_form.get('description').touched)">
+          {{ validation.message }}
+        </mat-error>
+      </ng-container>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button type="button" (click)="onNoClick()">Cancelar</button>
+    <button mat-button type="submit" [disabled]="!validations_form.valid">Guardar</button>
+  </div>
+</form>
