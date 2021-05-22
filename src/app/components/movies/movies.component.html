@@ -28,7 +28,7 @@
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> Acciones </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-icon-button>
+      <button (click)="editMovie(element)" mat-icon-button>
         <mat-icon>edit</mat-icon>
       </button>
       <button (click)="deleteMovie(element.id)" mat-icon-button color="warn">

@@ -14,7 +14,6 @@ export class MoviesService {
 
   storeMovie(params){
     return this.afs.collection("movies-collection").add(params)
-    // });
   }
 
   deleteMovie(id){
@@ -22,10 +21,10 @@ export class MoviesService {
   }
 
   showMovie(id){
-
+    return this.afs.collection('movies-collection').doc(id).valueChanges();
   }
 
   updateMovie(params, id){
-
+    return this.afs.collection('movies-collection').doc(id).update(params);
   }
 }

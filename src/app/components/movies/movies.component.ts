@@ -45,6 +45,7 @@ export class MoviesComponent implements OnInit {
   }
 
   getMovies(){
+    this.spinner.show();
     this.movieService.getMovies().subscribe((res: any[]) => {
       let result = res.map( e => {
         return {
@@ -52,7 +53,7 @@ export class MoviesComponent implements OnInit {
           ...e.payload.doc.data()
         };
       })
-
+      this.spinner.hide();
       this.DATA = result;
     });
 
@@ -91,6 +92,41 @@ export class MoviesComponent implements OnInit {
     }).catch((err) => {
       console.log(err);
 
+    });
+  }
+
+  editMovie(params){
+
+    const dialogRef = this.dialog.open(NewMovieComponent, {
+      width: '400px',
+      data: params
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result.type === 'submit') {
+        // this.showLoader = true;
+        this.spinner.show()
+        this.updateMovie(result);
+      }
+    });
+  }
+
+  updateMovie(data){
+    let params = {
+      description: data.description,
+      title: data.title
+    }
+
+    this.movieService.updateMovie(params, data.id).then((result) => {
+      this.spinner.hide()
+      this.snack.open('Película actualizada con exito', 'ok', {
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+        duration: 5000
+      })
+    }).catch((err) => {
+      console.log(err);
     });
   }
 
