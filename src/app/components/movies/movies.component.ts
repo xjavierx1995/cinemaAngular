@@ -34,13 +34,11 @@ export class MoviesComponent implements OnInit {
   newMovieModal(){
     const dialogRef = this.dialog.open(NewMovieComponent, {
       width: '400px',
-      // data: {name: 'Javier', animal: 'Dragon'}
     });
 
     dialogRef.afterClosed().subscribe(result => {
 
       if (result.type === 'submit') {
-        // this.showLoader = true;
         this.spinner.show()
         this.storeMovie(result);
       }
@@ -49,16 +47,6 @@ export class MoviesComponent implements OnInit {
 
   getMovies(){
     this.spinner.show();
-    // this.movieService.getMovies().subscribe((res: any[]) => {
-    //   let result = res.map( e => {
-    //     return {
-    //       id: e.payload.doc.id,
-    //       ...e.payload.doc.data()
-    //     };
-    //   })
-    //   this.spinner.hide();
-    //   this.DATA = result;
-    // });
 
     this.movieService.getMovies().snapshotChanges().pipe(
       map(changes =>
@@ -127,8 +115,6 @@ export class MoviesComponent implements OnInit {
   }
 
   updateMovie(data){
-    console.log(data);
-
     let params = {
       description: data.description,
       title: data.title

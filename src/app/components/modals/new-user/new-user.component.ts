@@ -1,18 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
 export interface ExternalData {
   key: string;
-  title: string;
-  description: string;
+  id: string;
+  name: string;
+  last_name: string;
 }
 @Component({
-  selector: 'app-new-movie',
-  templateUrl: './new-movie.component.html',
-  styleUrls: ['./new-movie.component.scss']
+  selector: 'app-new-user',
+  templateUrl: './new-user.component.html',
+  styleUrls: ['./new-user.component.scss']
 })
-export class NewMovieComponent implements OnInit {
+export class NewUserComponent implements OnInit {
 
   buttonActionTitle: string = 'Editar';
 
@@ -20,17 +20,21 @@ export class NewMovieComponent implements OnInit {
   errorMessage: string = '';
   successMessage: string = '';
   validation_messages = {
-    'title': [
+    'name': [
       { type: 'required', message: 'Este campo es requerido.' },
       { type: 'maxlength', message: 'No debe ser mayor a 255 caracteres.' },
      ],
-    'description': [
+    'lastname': [
+     { type: 'required', message: 'Este campo es requerido.' },
+     { type: 'maxlength', message: 'No debe ser mayor a 255 caracteres.' },
+    ],
+    'id': [
      { type: 'required', message: 'Este campo es requerido.' },
      { type: 'maxlength', message: 'No debe ser mayor a 255 caracteres.' },
     ]
   };
   constructor(
-    public dialogRef: MatDialogRef<NewMovieComponent>,
+    public dialogRef: MatDialogRef<NewUserComponent>,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public externalData: ExternalData
     ) { }
@@ -40,8 +44,9 @@ export class NewMovieComponent implements OnInit {
       this.buttonActionTitle = 'Guardar';
       this.externalData = {
         key: '',
-        title: '',
-        description: ''
+        id: '',
+        name: '',
+        last_name: '',
       }
     }
 
@@ -50,11 +55,15 @@ export class NewMovieComponent implements OnInit {
 
   validations(){
     this.validations_form = this.formBuilder.group({
-      title: new FormControl(this.externalData.title, Validators.compose([
+      id: new FormControl(this.externalData.id, Validators.compose([
         Validators.required,
         Validators.maxLength(255),
       ])),
-      description: new FormControl(this.externalData.description, Validators.compose([
+      name: new FormControl(this.externalData.name, Validators.compose([
+        Validators.required,
+        Validators.maxLength(255),
+      ])),
+      last_name: new FormControl(this.externalData.last_name, Validators.compose([
         Validators.required,
         Validators.maxLength(255),
       ])),
@@ -74,4 +83,5 @@ export class NewMovieComponent implements OnInit {
     form.key = this.externalData.key;
     this.dialogRef.close(form);
   }
+
 }

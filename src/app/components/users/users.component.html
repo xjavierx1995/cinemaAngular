@@ -1,1 +1,102 @@
-<p>users works!</p>
+<ngx-spinner></ngx-spinner>
+
+<mat-toolbar class="no-bg" style="padding: 0;">
+  <mat-button-toggle-group [(ngModel)]="typeView">
+    <mat-button-toggle value="table">
+      <mat-icon>table_rows</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle value="card">
+      <mat-icon>dashboard</mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+  <span class="spacer"></span>
+  <button (click)="newMovieModal()" mat-raised-button color="primary">
+    <mat-icon>add</mat-icon>
+    Nuevo
+  </button>
+</mat-toolbar>
+
+<table *ngIf="typeView === 'table'" mat-table [dataSource]="DATA" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Identificacion </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Nombres </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="last_name">
+    <th mat-header-cell *matHeaderCellDef> Apellidos </th>
+    <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
+  </ng-container>
+
+  <!-- Actions -->
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let element" style="width: 10%;">
+
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+
+        <button mat-menu-item (click)="editUser(element)">
+          <mat-icon>edit</mat-icon>
+          <span>Editar</span>
+        </button>
+
+        <button (click)="deleteUser(element.key)" mat-menu-item color="warn">
+          <mat-icon color="warn">delete</mat-icon>
+          <span>Eliminar</span>
+        </button>
+
+      </mat-menu>
+    </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<ng-container *ngIf="typeView === 'card'">
+  <div class="row">
+    <div class="col-lg-3 col-sm-6 mb-2" *ngFor="let item of DATA">
+      <mat-card class="example-card">
+        <mat-card-header class="p-0">
+          <!-- <div mat-card-avatar class="example-header-image"></div> -->
+          <mat-card-title>{{item.id}}</mat-card-title>
+          <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+        <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+        <mat-card-content style="min-height: 185px;">
+          <p>
+            {{item.name}} {{item.last_name}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="spacer"></div>
+
+          <button (click)="deleteUser(item.key)" mat-raised-button color="warn">
+            <mat-icon>delete</mat-icon>
+            <span>Eliminar</span>
+          </button>
+          <button mat-raised-button (click)="editUser(item)" color="primary">
+            <mat-icon>edit</mat-icon>
+            <span>Editar</span>
+          </button>
+
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</ng-container>

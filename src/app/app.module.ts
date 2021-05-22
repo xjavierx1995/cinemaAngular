@@ -15,6 +15,7 @@ import { NewMovieComponent } from './components/modals/new-movie/new-movie.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { NewUserComponent } from './components/modals/new-user/new-user.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     MoviesComponent,
     UsersComponent,
     DashboardComponent,
-    NewMovieComponent
+    NewMovieComponent,
+    NewUserComponent
   ],
   imports: [
     BrowserModule,
