@@ -18,6 +18,8 @@ export class MoviesComponent implements OnInit {
     'id',
   ];
   showLoader: boolean = false;
+
+  typeView: string = 'table';
   constructor(public dialog: MatDialog,
       public snack: MatSnackBar,
       private movieService: MoviesService,

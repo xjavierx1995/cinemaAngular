@@ -16,3 +16,18 @@ table {
   padding-right: 40%;
   padding-top: 30%;
 }
+
+.example-card {
+  min-width: 268px;
+  max-width: 268px;
+  min-height: 279px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.mat-card-header-text {
+  margin: 0;
+}

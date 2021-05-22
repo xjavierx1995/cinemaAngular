@@ -12,7 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import {AngularFirestore} from '@angular/fire/firestore'
 import { environment } from 'src/environments/environment';
 import { NewMovieComponent } from './components/modals/new-movie/new-movie.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
@@ -30,7 +30,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     ReactiveFormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    FormsModule
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent]
