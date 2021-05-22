@@ -8,7 +8,9 @@ import { MaterialModule } from './material.module';
 import { MoviesComponent } from './components/movies/movies.component';
 import { UsersComponent } from './components/users/users.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-
+import { AngularFireModule } from '@angular/fire';
+import {AngularFirestore} from '@angular/fire/firestore'
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -21,9 +23,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
