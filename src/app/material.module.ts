@@ -9,6 +9,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {MatTableModule} from '@angular/material/table';
     MatProgressBarModule,
     MatSidenavModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   exports:[
     MatSliderModule,
@@ -34,7 +36,8 @@ import {MatTableModule} from '@angular/material/table';
     MatProgressBarModule,
     MatSidenavModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule { }

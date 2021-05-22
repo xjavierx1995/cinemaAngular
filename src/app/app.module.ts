@@ -11,13 +11,15 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AngularFireModule } from '@angular/fire';
 import {AngularFirestore} from '@angular/fire/firestore'
 import { environment } from 'src/environments/environment';
+import { NewMovieComponent } from './components/modals/new-movie/new-movie.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MoviesComponent,
     UsersComponent,
-    DashboardComponent
+    DashboardComponent,
+    NewMovieComponent
   ],
   imports: [
     BrowserModule,

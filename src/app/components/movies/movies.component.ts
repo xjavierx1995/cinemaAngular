@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { NewMovieComponent } from '../modals/new-movie/new-movie.component';
 
 @Component({
   selector: 'app-movies',
@@ -19,9 +21,23 @@ export class MoviesComponent implements OnInit {
     {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
   ];
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+  }
+
+  newMovie(){
+    console.log('hola');
+
+    const dialogRef = this.dialog.open(NewMovieComponent, {
+      width: '250px',
+      data: {name: 'Javier', animal: 'Dragon'}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
   }
 
 }
