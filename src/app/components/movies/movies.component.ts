@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { MoviesService } from 'src/app/services/movies.service';
 import { NewMovieComponent } from '../modals/new-movie/new-movie.component';
 
@@ -19,7 +20,8 @@ export class MoviesComponent implements OnInit {
   showLoader: boolean = false;
   constructor(public dialog: MatDialog,
       public snack: MatSnackBar,
-      private movieService: MoviesService
+      private movieService: MoviesService,
+      private spinner: NgxSpinnerService
       ) { }
 
   ngOnInit(): void {
@@ -28,18 +30,17 @@ export class MoviesComponent implements OnInit {
 
   newMovieModal(){
     const dialogRef = this.dialog.open(NewMovieComponent, {
-      width: '250px',
+      width: '400px',
       // data: {name: 'Javier', animal: 'Dragon'}
     });
 
     dialogRef.afterClosed().subscribe(result => {
 
       if (result.type === 'submit') {
-        this.showLoader = true;
+        // this.showLoader = true;
+        this.spinner.show()
         this.storeMovie(result);
       }
-
-      // this.animal = result;
     });
   }
 
@@ -65,7 +66,7 @@ export class MoviesComponent implements OnInit {
     }
 
     this.movieService.storeMovie(params).then((result) => {
-      this.showLoader = false;
+      this.spinner.hide()
       this.snack.open('Película registrada con exito', 'ok', {
         horizontalPosition: 'end',
         verticalPosition: 'top',
@@ -78,9 +79,9 @@ export class MoviesComponent implements OnInit {
   }
 
   deleteMovie(id){
-    this.showLoader = true;
+    this.spinner.show();
     this.movieService.deleteMovie(id).then((result) => {
-      this.showLoader = false;
+      this.spinner.hide();
       this.snack.open('Película eliminada con exito', 'ok', {
         horizontalPosition: 'end',
         verticalPosition: 'top',
