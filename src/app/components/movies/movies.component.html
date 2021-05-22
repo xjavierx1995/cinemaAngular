@@ -48,7 +48,7 @@
           <span>Editar</span>
         </button>
 
-        <button (click)="deleteMovie(element.id)" mat-menu-item color="warn">
+        <button (click)="deleteMovie(element.key)" mat-menu-item color="warn">
           <mat-icon color="warn">delete</mat-icon>
           <span>Eliminar</span>
         </button>
@@ -80,7 +80,7 @@
         <mat-card-actions>
           <div class="spacer"></div>
 
-          <button (click)="deleteMovie(item.id)" mat-raised-button color="warn">
+          <button (click)="deleteMovie(item.key)" mat-raised-button color="warn">
             <mat-icon>delete</mat-icon>
             <span>Eliminar</span>
           </button>

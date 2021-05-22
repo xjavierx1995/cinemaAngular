@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MoviesService } from 'src/app/services/movies.service';
 import { NewMovieComponent } from '../modals/new-movie/new-movie.component';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-movies',
@@ -48,15 +49,26 @@ export class MoviesComponent implements OnInit {
 
   getMovies(){
     this.spinner.show();
-    this.movieService.getMovies().subscribe((res: any[]) => {
-      let result = res.map( e => {
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        };
-      })
+    // this.movieService.getMovies().subscribe((res: any[]) => {
+    //   let result = res.map( e => {
+    //     return {
+    //       id: e.payload.doc.id,
+    //       ...e.payload.doc.data()
+    //     };
+    //   })
+    //   this.spinner.hide();
+    //   this.DATA = result;
+    // });
+
+    this.movieService.getMovies().snapshotChanges().pipe(
+      map(changes =>
+        changes.map((c: any) =>
+          ({ key: c.payload.key, ...c.payload.val() })
+        )
+      )
+    ).subscribe(data => {
+      this.DATA = data;
       this.spinner.hide();
-      this.DATA = result;
     });
 
   }
@@ -115,12 +127,14 @@ export class MoviesComponent implements OnInit {
   }
 
   updateMovie(data){
+    console.log(data);
+
     let params = {
       description: data.description,
       title: data.title
     }
 
-    this.movieService.updateMovie(params, data.id).then((result) => {
+    this.movieService.updateMovie(params, data.key).then((result) => {
       this.spinner.hide()
       this.snack.open('Película actualizada con exito', 'ok', {
         horizontalPosition: 'end',

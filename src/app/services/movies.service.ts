@@ -1,30 +1,36 @@
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoviesService {
+  private dbPath = '/movies';
 
-  constructor(private afs: AngularFirestore) { }
+  moviesRef: AngularFireList<any>;
+
+  constructor(private db: AngularFireDatabase) {
+    this.moviesRef = db.list(this.dbPath);
+  }
 
   getMovies(){
-    return this.afs.collection('movies-collection').snapshotChanges();
+    return this.moviesRef;
   }
 
   storeMovie(params){
-    return this.afs.collection("movies-collection").add(params)
+    return this.moviesRef.push(params);
   }
 
   deleteMovie(id){
-    return this.afs.collection('movies-collection').doc(id).delete();
+    return this.moviesRef.remove(id)
   }
 
   showMovie(id){
-    return this.afs.collection('movies-collection').doc(id).valueChanges();
+
   }
 
   updateMovie(params, id){
-    return this.afs.collection('movies-collection').doc(id).update(params);
+    return this.moviesRef.update(id, params);
   }
 }

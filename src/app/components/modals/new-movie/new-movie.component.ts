@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 export interface ExternalData {
-  id: string;
+  key: string;
   title: string;
   description: string;
 }
@@ -44,7 +44,7 @@ export class NewMovieComponent implements OnInit {
     if (this.externalData == null) {
       this.buttonActionTitle = 'Guardar';
       this.externalData = {
-        id: '',
+        key: '',
         title: '',
         description: ''
       }
@@ -76,7 +76,7 @@ export class NewMovieComponent implements OnInit {
 
   register(form){
     form.type = 'submit';
-    form.id = this.externalData.id;
+    form.key = this.externalData.key;
     this.dialogRef.close(form);
   }
 }

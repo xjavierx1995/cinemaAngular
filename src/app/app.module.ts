@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 import { NewMovieComponent } from './components/modals/new-movie/new-movie.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BrowserAnimationsModule,
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
     FormsModule
