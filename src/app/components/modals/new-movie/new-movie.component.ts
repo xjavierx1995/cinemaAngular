@@ -19,6 +19,8 @@ export class NewMovieComponent implements OnInit {
     title: ''
   }
 
+  buttonActionTitle: string = 'Editar';
+
   validations_form: FormGroup;
   errorMessage: string = '';
   successMessage: string = '';
@@ -40,6 +42,7 @@ export class NewMovieComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.externalData == null) {
+      this.buttonActionTitle = 'Guardar';
       this.externalData = {
         id: '',
         title: '',
