@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MoviesService } from 'src/app/services/movies.service';
 import { NewMovieComponent } from '../modals/new-movie/new-movie.component';
 
 @Component({
@@ -9,23 +10,20 @@ import { NewMovieComponent } from '../modals/new-movie/new-movie.component';
   styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
-  DATA: object[]  = [
-    {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-    {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-    {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-    {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-    {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-    {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-    {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-    {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-    {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-    {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+  DATA: object[];
+  displayedColumns: string[] = [
+    'title',
+    'description',
+    'id',
   ];
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   showLoader: boolean = false;
-  constructor(public dialog: MatDialog, public snack: MatSnackBar) { }
+  constructor(public dialog: MatDialog,
+      public snack: MatSnackBar,
+      private movieService: MoviesService
+      ) { }
 
   ngOnInit(): void {
+    this.getMovies()
   }
 
   newMovieModal(){
@@ -45,6 +43,20 @@ export class MoviesComponent implements OnInit {
     });
   }
 
+  getMovies(){
+    this.movieService.getMovies().subscribe((res: any[]) => {
+      let result = res.map( e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        };
+      })
+
+      this.DATA = result;
+    });
+
+  }
+
   storeMovie(data){
 
     let params = {
@@ -52,17 +64,33 @@ export class MoviesComponent implements OnInit {
       title: data.title
     }
 
-    setTimeout(() => {
+    this.movieService.storeMovie(params).then((result) => {
       this.showLoader = false;
-
       this.snack.open('Película registrada con exito', 'ok', {
         horizontalPosition: 'end',
         verticalPosition: 'top',
         duration: 5000
       })
-    }, 5000);
+    }).catch((err) => {
+      console.log(err);
 
+    });
+  }
 
+  deleteMovie(id){
+    this.showLoader = true;
+    this.movieService.deleteMovie(id).then((result) => {
+      this.showLoader = false;
+      this.snack.open('Película eliminada con exito', 'ok', {
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+        duration: 5000
+      })
+
+    }).catch((err) => {
+      console.log(err);
+
+    });
   }
 
 }

@@ -13,16 +13,12 @@ export class MoviesService {
   }
 
   storeMovie(params){
-    return new Promise<any>((resolve, reject) =>{
-      this.afs
-        .collection("movies-collection")
-        .add(params)
-        .then(response => { console.log(response) }, error => reject(error));
-    });
+    return this.afs.collection("movies-collection").add(params)
+    // });
   }
 
   deleteMovie(id){
-
+    return this.afs.collection('movies-collection').doc(id).delete();
   }
 
   showMovie(id){
