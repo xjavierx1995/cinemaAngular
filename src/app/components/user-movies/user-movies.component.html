@@ -1,37 +1,46 @@
 <ngx-spinner></ngx-spinner>
 
-<mat-toolbar class="no-bg" style="padding: 0;">
-  <mat-button-toggle-group [(ngModel)]="typeView">
-    <mat-button-toggle value="table">
-      <mat-icon>table_rows</mat-icon>
-    </mat-button-toggle>
-    <mat-button-toggle value="card">
-      <mat-icon>dashboard</mat-icon>
-    </mat-button-toggle>
-  </mat-button-toggle-group>
-  <span class="spacer"></span>
-  <button (click)="newModal()" mat-raised-button color="primary">
-    <mat-icon>add</mat-icon>
-    Nuevo
-  </button>
-</mat-toolbar>
+<div class="row">
+  <div class="col-lg-2 col-sm-3 mb-3">
+    <mat-button-toggle-group [(ngModel)]="typeView">
+      <mat-button-toggle value="table">
+        <mat-icon>table_rows</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="card">
+        <mat-icon>dashboard</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="col-lg-8 col-sm-6">
+    <mat-form-field style="width: 100%;" appearance="fill">
+      <mat-label>Usuario</mat-label>
+      <input type="text"
+            matInput
+            (ngModelChange)="getUserMovies($event.key)"
+            #user
+            [(ngModel)]="userMovieSelect"
+            [matAutocomplete]="users">
+      <button mat-button *ngIf="userMovieSelect" matSuffix mat-icon-button aria-label="Clear" (click)="userMovieSelect=''">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-autocomplete  #users="matAutocomplete" [displayWith]="displayFnUser">
+        <mat-option *ngFor="let option of dataUsers | filter: user.value : 'name'" [value]="option">
+          {{option.name}} {{option.last_name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <div class="col-lg-2 col-sm-3" *ngIf="userMovieSelect">
+    <button (click)="newModal()" mat-raised-button color="primary" class="mt-2">
+      <mat-icon>add</mat-icon>
+      Nueva asignación
+    </button>
+  </div>
+</div>
 
 
 
-<mat-form-field style="width: 40%;">
-  <mat-label>Usuario</mat-label>
-  <input type="text"
-        matInput
-        (ngModelChange)="getUserMovies($event.key)"
-        #user
-        [(ngModel)]="userMovieSelect"
-        [matAutocomplete]="users">
-  <button mat-button *ngIf="userMovieSelect" matSuffix mat-icon-button aria-label="Clear" (click)="userMovieSelect=''">
-    <mat-icon>close</mat-icon>
-  </button>
-  <mat-autocomplete  #users="matAutocomplete" [displayWith]="displayFnUser">
-    <mat-option *ngFor="let option of dataUsers | filter: user.value : 'name'" [value]="option">
-      {{option.name}} {{option.last_name}}
-    </mat-option>
-  </mat-autocomplete>
-</mat-form-field>
+
+
+
+
