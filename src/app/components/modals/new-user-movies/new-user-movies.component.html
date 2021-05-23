@@ -2,34 +2,26 @@
 <form [formGroup]="validations_form" (ngSubmit)="register(validations_form.value)" style="width: 100%;">
   <div mat-dialog-content>
 
-
     <mat-form-field style="width: 100%;">
-      <mat-label>Number</mat-label>
+      <mat-label>Película</mat-label>
       <input type="text"
             matInput
-            formControlName="user"
-            [matAutocomplete]="users">
-      <mat-autocomplete #users="matAutocomplete">
-        <mat-option *ngFor="let option of dataUsers" [value]="option">
-          {{option.name}} {{option.last_name}}
+            #movie
+            formControlName="movie"
+            [matAutocomplete]="movies">
+      <mat-autocomplete  #movies="matAutocomplete" [displayWith]="displayFnMovie">
+        <mat-option *ngFor="let option of dataMovies | filter: movie.value : 'title'" [value]="option">
+          {{option.title}}
         </mat-option>
       </mat-autocomplete>
-      <ng-container *ngFor="let validation of validation_messages.user">
-        <mat-error *ngIf="validations_form.get('user').hasError(validation.type) && (validations_form.get('user').dirty || validations_form.get('user').touched)">
+      <ng-container *ngFor="let validation of validation_messages.movie">
+        <mat-error *ngIf="validations_form.get('movie').hasError(validation.type) && (validations_form.get('movie').dirty || validations_form.get('movie').touched)">
           {{ validation.message }}
         </mat-error>
       </ng-container>
     </mat-form-field>
 
-    <!-- <mat-form-field style="width: 100%; margin: 0;">
-      <mat-label>Nombres</mat-label>
-      <input matInput formControlName="name">
-      <ng-container *ngFor="let validation of validation_messages.name">
-        <mat-error *ngIf="validations_form.get('name').hasError(validation.type) && (validations_form.get('name').dirty || validations_form.get('name').touched)">
-          {{ validation.message }}
-        </mat-error>
-      </ng-container>
-    </mat-form-field> -->
+
 
   </div>
   <div mat-dialog-actions>

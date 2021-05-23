@@ -18,6 +18,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { NewUserComponent } from './components/modals/new-user/new-user.component';
 import { UserMoviesComponent } from './components/user-movies/user-movies.component';
 import { NewUserMoviesComponent } from './components/modals/new-user-movies/new-user-movies.component';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { NewUserMoviesComponent } from './components/modals/new-user-movies/new-
     AngularFireDatabaseModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-    FormsModule
+    FormsModule,
+    PipesModule
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent]

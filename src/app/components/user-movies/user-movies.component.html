@@ -15,3 +15,23 @@
     Nuevo
   </button>
 </mat-toolbar>
+
+
+
+<mat-form-field style="width: 40%;">
+  <mat-label>Usuario</mat-label>
+  <input type="text"
+        matInput
+        (ngModelChange)="getUserMovies($event.key)"
+        #user
+        [(ngModel)]="userMovieSelect"
+        [matAutocomplete]="users">
+  <button mat-button *ngIf="userMovieSelect" matSuffix mat-icon-button aria-label="Clear" (click)="userMovieSelect=''">
+    <mat-icon>close</mat-icon>
+  </button>
+  <mat-autocomplete  #users="matAutocomplete" [displayWith]="displayFnUser">
+    <mat-option *ngFor="let option of dataUsers | filter: user.value : 'name'" [value]="option">
+      {{option.name}} {{option.last_name}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
