@@ -18,6 +18,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatMenuModule,
     MatCardModule,
     MatButtonToggleModule,
-    MatGridListModule
+    MatGridListModule,
+    MatAutocompleteModule
   ],
   exports:[
     MatSliderModule,
@@ -61,7 +63,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatMenuModule,
     MatCardModule,
     MatButtonToggleModule,
-    MatGridListModule
+    MatGridListModule,
+    MatAutocompleteModule
   ]
 })
 export class MaterialModule { }

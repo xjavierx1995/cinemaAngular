@@ -15,16 +15,15 @@ export interface ExternalData {
 export class NewUserComponent implements OnInit {
 
   buttonActionTitle: string = 'Editar';
+  typeView: string = 'table';
 
   validations_form: FormGroup;
-  errorMessage: string = '';
-  successMessage: string = '';
   validation_messages = {
     'name': [
       { type: 'required', message: 'Este campo es requerido.' },
       { type: 'maxlength', message: 'No debe ser mayor a 255 caracteres.' },
      ],
-    'lastname': [
+    'last_name': [
      { type: 'required', message: 'Este campo es requerido.' },
      { type: 'maxlength', message: 'No debe ser mayor a 255 caracteres.' },
     ],

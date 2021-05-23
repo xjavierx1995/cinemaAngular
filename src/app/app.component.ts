@@ -22,6 +22,11 @@ export class AppComponent {
       name: 'Usuarios',
       url: '/users',
       icon: 'person'
+    },
+    {
+      name: 'Arriendo',
+      url: '/users-movies',
+      icon: 'checklist_rtl'
     }
   ];
 

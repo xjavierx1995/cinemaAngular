@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MoviesComponent } from './components/movies/movies.component';
+import { UserMoviesComponent } from './components/user-movies/user-movies.component';
 import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent },
   {path: 'movies', component: MoviesComponent },
   {path: 'users', component: UsersComponent },
+  {path: 'users-movies', component: UserMoviesComponent },
 ];
 
 @NgModule({

@@ -16,6 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { NewUserComponent } from './components/modals/new-user/new-user.component';
+import { UserMoviesComponent } from './components/user-movies/user-movies.component';
+import { NewUserMoviesComponent } from './components/modals/new-user-movies/new-user-movies.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { NewUserComponent } from './components/modals/new-user/new-user.componen
     UsersComponent,
     DashboardComponent,
     NewMovieComponent,
-    NewUserComponent
+    NewUserComponent,
+    UserMoviesComponent,
+    NewUserMoviesComponent
   ],
   imports: [
     BrowserModule,
