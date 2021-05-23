@@ -17,6 +17,13 @@ export class UserMoviesComponent implements OnInit {
   typeView: string = 'table';
   dataUsers: any;
   userMovieSelect: any;
+  displayedColumns: string[] = [
+    'title',
+    'description',
+    'id',
+  ];
+
+  dataMovies: any[];
 
   constructor(
     public dialog: MatDialog,
@@ -95,7 +102,7 @@ export class UserMoviesComponent implements OnInit {
       )
     ).subscribe(data => {
       console.log(data);
-
+      this.dataMovies = data;
     });
   }
 
