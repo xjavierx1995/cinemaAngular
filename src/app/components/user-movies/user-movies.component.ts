@@ -16,14 +16,14 @@ export class UserMoviesComponent implements OnInit {
 
   typeView: string = 'table';
   dataUsers: any;
-  userMovieSelect: any;
+  userMovieSelect: any[];
   displayedColumns: string[] = [
     'title',
     'description',
     'id',
   ];
 
-  dataMovies: any[];
+  dataMovies: any[] = [];
 
   constructor(
     public dialog: MatDialog,
@@ -38,7 +38,7 @@ export class UserMoviesComponent implements OnInit {
   }
 
   getUsers(){
-
+    this.spinner.show();
     this.userService.getUsers().snapshotChanges().pipe(
       map(changes =>
         changes.map((c: any) =>
@@ -47,8 +47,7 @@ export class UserMoviesComponent implements OnInit {
       )
     ).subscribe(data => {
       this.dataUsers = data;
-      console.log(data);
-
+      this.spinner.hide();
     });
 
   }
@@ -74,7 +73,8 @@ export class UserMoviesComponent implements OnInit {
   storeUserMovie(data){
 
     let params = {
-      ...data.movie
+      title: data.movie.title,
+      description: data.movie.description
     }
 
     this.userMovieService.storeUser(params, this.userMovieSelect.key).then((result) => {
@@ -92,8 +92,6 @@ export class UserMoviesComponent implements OnInit {
   }
 
   getUserMovies(key){
-    console.log(key);
-
     this.userMovieService.showUserMovies(key).snapshotChanges().pipe(
       map(changes =>
         changes.map((c: any) =>
@@ -101,9 +99,21 @@ export class UserMoviesComponent implements OnInit {
         )
       )
     ).subscribe(data => {
-      console.log(data);
       this.dataMovies = data;
     });
   }
 
+  deleteUserMovie(key){
+    this.spinner.show()
+    this.userMovieService.deleteUserMovie(this.userMovieSelect.key, key).then((result) => {
+      this.spinner.hide()
+      this.snack.open('Arriendo eliminado con exito', 'ok', {
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+        duration: 5000
+      })
+    }).catch((err) => {
+
+    });
+  }
 }

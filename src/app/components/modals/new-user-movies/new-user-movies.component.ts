@@ -50,8 +50,6 @@ export class NewUserMoviesComponent implements OnInit {
       )
     ).subscribe(data => {
       this.dataUsers = data;
-      console.log(data);
-
     });
 
   }

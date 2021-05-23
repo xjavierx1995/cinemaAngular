@@ -65,12 +65,7 @@
       </button>
       <mat-menu #menu="matMenu">
 
-        <button mat-menu-item (click)="editMovie(element)">
-          <mat-icon>edit</mat-icon>
-          <span>Editar</span>
-        </button>
-
-        <button (click)="deleteMovie(element.key)" mat-menu-item color="warn">
+        <button (click)="deleteUserMovie(element.key)" mat-menu-item color="warn">
           <mat-icon color="warn">delete</mat-icon>
           <span>Eliminar</span>
         </button>
@@ -84,16 +79,13 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<ng-container *ngIf="typeView === 'card'">
+<ng-container *ngIf="typeView === 'card' && userMovieSelect">
   <div class="row">
     <div class="col-lg-3 col-sm-6 mb-2" *ngFor="let item of dataMovies">
       <mat-card class="example-card">
         <mat-card-header class="p-0">
-          <!-- <div mat-card-avatar class="example-header-image"></div> -->
           <mat-card-title>{{item.title}}</mat-card-title>
-          <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
         </mat-card-header>
-        <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
         <mat-card-content style="min-height: 185px;">
           <p>
             {{item.description}}
@@ -102,21 +94,26 @@
         <mat-card-actions>
           <div class="spacer"></div>
 
-          <button (click)="deleteMovie(item.key)" mat-raised-button color="warn">
+          <button (click)="deleteUserMovie(item.key)" mat-raised-button color="warn">
             <mat-icon>delete</mat-icon>
             <span>Eliminar</span>
           </button>
-          <button mat-raised-button (click)="editMovie(item)" color="primary">
-            <mat-icon>edit</mat-icon>
-            <span>Editar</span>
-          </button>
-
         </mat-card-actions>
       </mat-card>
     </div>
   </div>
 </ng-container>
 
+<mat-card class="example-card" *ngIf="dataMovies?.length == 0 && userMovieSelect">
+  <img mat-card-image src="../../../assets/svg/void.svg" style="max-height: 366px;">
+  <mat-card-content>
+    <h1 class="text-center">Sin arriendo</h1>
+  </mat-card-content>
+</mat-card>
 
-
-
+<mat-card class="example-card" *ngIf="!userMovieSelect">
+  <img mat-card-image src="../../../assets/svg/select.svg" style="max-height: 366px;">
+  <mat-card-content>
+    <h1 class="text-center">Seleccione un usuario</h1>
+  </mat-card-content>
+</mat-card>

@@ -21,8 +21,8 @@ export class UserMoviesService {
     // return this.usersRef.push(params);
   }
 
-  deleteUser(id) {
-    return this.usersRef.remove(id)
+  deleteUserMovie(Userkey, MovieKey) {
+    return this.db.list(this.dbPath+'/'+Userkey).remove(MovieKey);
   }
 
   showUserMovies(key) {
