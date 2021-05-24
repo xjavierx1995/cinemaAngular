@@ -36,6 +36,7 @@ export class AppComponent {
     }
   ];
   isLogged: any;
+  path: string = '';
   constructor(
     public dialog: MatDialog,
     private spinner: NgxSpinnerService,
@@ -44,8 +45,16 @@ export class AppComponent {
     public snack: MatSnackBar
   ) {
     this.isLogged = this.authService.isLoggedIn;
+
   }
 
+  ngOnInit(): void {
+    this.verifiRoute()
+  }
+
+  verifiRoute(url?){
+    this.path = url ? url.split('/')[1] : window.location.pathname.split('/')[1];
+  }
 
   openModal() {
     const dialogRef = this.dialog.open(LoginComponent, {

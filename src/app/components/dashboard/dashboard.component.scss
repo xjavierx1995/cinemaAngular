@@ -29,3 +29,162 @@ section {
   justify-content: center;
   width: 120px;
 }
+.custom-body {
+  background-color: #2a2a2a;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  color: #fff;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+.custom-body .siteWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  background: url("../../../assets/images/bg.jpg");
+  background-size: cover;
+  transition: all 0.2s ease-in-out;
+}
+.custom-body .siteWrapper a {
+  color: #fff;
+  text-decoration: none;
+}
+.custom-body .siteWrapper header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  width: 95%;
+}
+.custom-body .siteWrapper header nav .siteNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.custom-body .siteWrapper header nav .siteNav li {
+  position: relative;
+  padding: 0 5px;
+  margin: 0 5px;
+  font-style: italic;
+}
+.custom-body .siteWrapper header nav .siteNav li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: #b31f73;
+  transform: scaleX(0);
+  transition: 0.3s ease-in-out;
+}
+.custom-body .siteWrapper header nav .siteNav li:hover::after {
+  transform: scaleX(1);
+}
+.custom-body .siteWrapper header .logo {
+  color: #fff;
+  text-decoration: none;
+  font-size: 30px;
+  font-family: "Caveat", cursive;
+  text-align: center;
+  background-color: rgba(34, 34, 34, 0.5);
+  border-radius: 50%;
+  padding: 10px 15px;
+  backdrop-filter: blur(3px);
+}
+.custom-body .siteWrapper header .buttonWrapper {
+  margin: 0 10px;
+}
+.custom-body .siteWrapper header .buttonWrapper .button {
+  margin: 0;
+  font-size: 16px;
+  width: 81px;
+  height: 37px;
+}
+.custom-body .siteWrapper header .buttonWrapper .button .text {
+  top: 12px;
+}
+.custom-body .siteWrapper main {
+  text-align: center;
+}
+.custom-body .siteWrapper main .title {
+  color: #fff;
+  text-decoration: none;
+  margin-top: 40%;
+  font-size: 150px;
+  font-family: "Permanent Marker", cursive;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5), 0 0 20px rgba(179, 31, 115, 0.4), 0 0 5px rgba(34, 34, 34, 0.5);
+}
+.custom-body .siteWrapper main .title .subtitle {
+  margin-top: 16%;
+  font-size: 80px;
+}
+.custom-body .siteWrapper footer {
+  text-align: right;
+  width: 100%;
+  padding: 10px 0;
+  backdrop-filter: blur(3px);
+}
+.custom-body .siteWrapper footer .date {
+  font-size: 10px;
+  padding-right: 20px;
+  font-style: italic;
+}
+.custom-body .siteWrapper footer .author {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  position: absolute;
+  left: calc(50% - 96px);
+  bottom: 0;
+  font-style: italic;
+  font-size: 12px;
+  padding: 10px 20px;
+}
+.custom-body .siteWrapper .button {
+  margin-top: 11%;
+  // margin: 20px 0;
+  background: none;
+  color: #fff;
+  font-size: 20px;
+  position: relative;
+  width: 180px;
+  height: 60px;
+  cursor: pointer;
+  border: none;
+}
+.custom-body .siteWrapper .button:hover .border {
+  background-color: rgba(179, 31, 115, 0.7);
+}
+.custom-body .siteWrapper .button:hover .hl-line {
+  stroke-dashoffset: -480;
+}
+.custom-body .siteWrapper .button .text {
+  text-align: center;
+  position: absolute;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  top: 20px;
+}
+.custom-body .siteWrapper .button .border {
+  fill: none;
+  stroke-width: 1;
+  background-color: rgba(179, 31, 115, 0.4);
+  transition: all 0.8s ease-in-out;
+}
+.custom-body .siteWrapper .button .background {
+  fill: rgba(0, 0, 0, 0);
+  stroke: #b31f73;
+  transition: all 0.8s ease-in-out;
+}
+.custom-body .siteWrapper .button .hl-line {
+  stroke: #fff;
+  stroke-dasharray: 40 480;
+  stroke-dashoffset: 40;
+  transition: all 0.8s ease-in-out;
+}
