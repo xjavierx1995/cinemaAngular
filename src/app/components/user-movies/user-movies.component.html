@@ -1,0 +1,119 @@
+<ngx-spinner></ngx-spinner>
+
+<div class="row">
+  <div class="col-lg-2 col-sm-3 mb-3">
+    <mat-button-toggle-group [(ngModel)]="typeView">
+      <mat-button-toggle value="table">
+        <mat-icon>table_rows</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle value="card">
+        <mat-icon>dashboard</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="col-lg-8 col-sm-6">
+    <mat-form-field style="width: 100%;" appearance="fill">
+      <mat-label>Usuario</mat-label>
+      <input type="text"
+            matInput
+            (ngModelChange)="getUserMovies($event.key)"
+            #user
+            [(ngModel)]="userMovieSelect"
+            [matAutocomplete]="users">
+      <button mat-button *ngIf="userMovieSelect" matSuffix mat-icon-button aria-label="Clear" (click)="userMovieSelect=''">
+        <mat-icon>close</mat-icon>
+      </button>
+      <mat-autocomplete  #users="matAutocomplete" [displayWith]="displayFnUser">
+        <mat-option *ngFor="let option of dataUsers | filter: user.value : 'name'" [value]="option">
+          {{option.name}} {{option.last_name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <div class="col-lg-2 col-sm-3" *ngIf="userMovieSelect">
+    <button (click)="newModal()" mat-raised-button color="primary" class="mt-2">
+      <mat-icon>add</mat-icon>
+      Nueva asignación
+    </button>
+  </div>
+</div>
+
+<table *ngIf="typeView === 'table' && dataMovies?.length > 0 && userMovieSelect" mat-table [dataSource]="dataMovies" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> Título </th>
+    <td mat-cell *matCellDef="let element" style="width: 280px;"> {{element.title}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Descripción </th>
+    <td mat-cell *matCellDef="let element" style="width: 68%;"> {{element.description}} </td>
+  </ng-container>
+
+  <!-- Actions -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let element">
+
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+
+        <button (click)="deleteUserMovie(element.key)" mat-menu-item color="warn">
+          <mat-icon color="warn">delete</mat-icon>
+          <span>Eliminar</span>
+        </button>
+
+      </mat-menu>
+    </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<ng-container *ngIf="typeView === 'card' && userMovieSelect">
+  <div class="row">
+    <div class="col-lg-3 col-sm-6 mb-2" *ngFor="let item of dataMovies">
+      <mat-card class="example-card">
+        <mat-card-header class="p-0">
+          <mat-card-title>{{item.title}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content style="min-height: 185px;">
+          <p>
+            {{item.description}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="spacer"></div>
+
+          <button (click)="deleteUserMovie(item.key)" mat-raised-button color="warn">
+            <mat-icon>delete</mat-icon>
+            <span>Eliminar</span>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</ng-container>
+
+<mat-card class="example-card" *ngIf="dataMovies?.length == 0 && userMovieSelect">
+  <img mat-card-image src="../../../assets/svg/void.svg" style="max-height: 366px;">
+  <mat-card-content>
+    <h1 class="text-center">Sin arriendo</h1>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="example-card" *ngIf="!userMovieSelect">
+  <img mat-card-image src="../../../assets/svg/select.svg" style="max-height: 366px;">
+  <mat-card-content>
+    <h1 class="text-center">Seleccione un usuario</h1>
+  </mat-card-content>
+</mat-card>

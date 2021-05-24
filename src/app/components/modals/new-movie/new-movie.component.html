@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Nueva película</h1>
+<form [formGroup]="validations_form" (ngSubmit)="register(validations_form.value)" style="width: 100%;">
+  <div mat-dialog-content>
+
+
+    <mat-form-field style="width: 100%;">
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="title">
+      <ng-container *ngFor="let validation of validation_messages.title">
+        <mat-error *ngIf="validations_form.get('title').hasError(validation.type) && (validations_form.get('title').dirty || validations_form.get('title').touched)">
+          {{ validation.message }}
+        </mat-error>
+      </ng-container>
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%; margin: 0;">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput #description maxlength="255" formControlName="description"></textarea>
+      <mat-hint align="end">{{description.value.length}} / 255</mat-hint>
+      <ng-container *ngFor="let validation of validation_messages.description">
+        <mat-error *ngIf="validations_form.get('description').hasError(validation.type) && (validations_form.get('description').dirty || validations_form.get('description').touched)">
+          {{ validation.message }}
+        </mat-error>
+      </ng-container>
+    </mat-form-field>
+
+  </div>
+  <div mat-dialog-actions>
+    <div class="spacer"></div>
+    <button mat-raised-button type="button" (click)="onNoClick()">Cancelar</button>
+    <button mat-raised-button type="submit" [disabled]="!validations_form.valid" color="primary">{{buttonActionTitle}}</button>
+  </div>
+</form>

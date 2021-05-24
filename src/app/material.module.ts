@@ -8,6 +8,19 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
+import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 @NgModule({
   declarations: [],
@@ -20,7 +33,19 @@ import {MatListModule} from '@angular/material/list';
     MatToolbarModule,
     MatProgressBarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatTableModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+    MatMenuModule,
+    MatCardModule,
+    MatButtonToggleModule,
+    MatGridListModule,
+    MatAutocompleteModule,
+    MatTooltipModule
   ],
   exports:[
     MatSliderModule,
@@ -30,7 +55,19 @@ import {MatListModule} from '@angular/material/list';
     MatToolbarModule,
     MatProgressBarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatTableModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+    MatMenuModule,
+    MatCardModule,
+    MatButtonToggleModule,
+    MatGridListModule,
+    MatAutocompleteModule,
+    MatTooltipModule
   ]
 })
 export class MaterialModule { }
