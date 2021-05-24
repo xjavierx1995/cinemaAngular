@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Ingrese sus datos para iniciar sesión</h1>
+<form [formGroup]="validations_form" (ngSubmit)="register(validations_form.value)" style="width: 100%;">
+  <div mat-dialog-content>
+
+
+    <mat-form-field style="width: 100%;">
+      <mat-label>Correo electrónico</mat-label>
+      <input matInput maxlength="255" type="email" formControlName="email">
+      <ng-container *ngFor="let validation of validation_messages.email">
+        <mat-error *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
+          {{ validation.message }}
+        </mat-error>
+      </ng-container>
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%; margin: 0;">
+      <mat-label>Contraseña</mat-label>
+      <input matInput maxlength="255" type="password" formControlName="password">
+      <ng-container *ngFor="let validation of validation_messages.password">
+        <mat-error *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
+          {{ validation.message }}
+        </mat-error>
+      </ng-container>
+    </mat-form-field>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button type="button" (click)="onNoClick()">Cancelar</button>
+    <button mat-raised-button type="submit" [disabled]="!validations_form.valid" color="primary">Iniciar sesión</button>
+  </div>
+</form>

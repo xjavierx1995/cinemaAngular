@@ -16,7 +16,7 @@ export class UserMoviesComponent implements OnInit {
 
   typeView: string = 'table';
   dataUsers: any;
-  userMovieSelect: any[];
+  userMovieSelect: any;
   displayedColumns: string[] = [
     'title',
     'description',

@@ -19,6 +19,8 @@ import { NewUserComponent } from './components/modals/new-user/new-user.componen
 import { UserMoviesComponent } from './components/user-movies/user-movies.component';
 import { NewUserMoviesComponent } from './components/modals/new-user-movies/new-user-movies.component';
 import { PipesModule } from './pipes/pipes.module';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { LoginComponent } from './components/modals/login/login.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { PipesModule } from './pipes/pipes.module';
     NewMovieComponent,
     NewUserComponent,
     UserMoviesComponent,
-    NewUserMoviesComponent
+    NewUserMoviesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +41,7 @@ import { PipesModule } from './pipes/pipes.module';
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
     FormsModule,
