@@ -30,14 +30,14 @@
 
   <mat-sidenav #sidenav mode="over" class="sidenav-custom" >
     <mat-selection-list [multiple]="false">
-      <mat-list-option [routerLink]="[route.url]" routerLinkActive="active(route)"  *ngFor="let route of routes" [value]="route.url">
+      <mat-list-option [routerLink]="[route.url]" (click)="verifiRoute(route.url)"  *ngFor="let route of routes" [value]="route.url">
         <mat-icon mat-list-icon>{{route.icon}}</mat-icon>
         {{route.name}}
       </mat-list-option>
     </mat-selection-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="container">
+    <div [class.container]="path !== 'dashboard'">
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
