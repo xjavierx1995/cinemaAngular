@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/cinemaAngular",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
